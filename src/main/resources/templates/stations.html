@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <table class="table table-dark table-hover mb-3">
+    <thead>
+    <tr>
+      <td><strong>#</strong></td>
+      <td><strong>Название станции</strong></td>
+      <td><strong>Широта</strong></td>
+      <td><strong>Долгота</strong></td>
+      <td><strong>Действия</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="station : ${stations}">
+      <td th:text="${station.id}"></td>
+      <td th:text="${station.name}"></td>
+      <td th:text="${station.latitude}"></td>
+      <td th:text="${station.longitude}"></td>
+      <td>
+        <a th:href="|view/${station.id}|">Просмотр</a>
+        <a th:href="|edit/${station.id}|">Изменить</a>
+        <a th:href="|remove/${station.id}|">Удалить</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-grid gap-1">
+        <a class="btn btn-success" href="create">Cоздать</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
