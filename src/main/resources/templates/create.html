@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <form action="create" method="post">
+        <div class="row mb-3">
+            <div class="col-12">
+                <label class="form-label" for="name">Название станции:</label>
+                <input class="form-control" type="text" name="name" id="name" required/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="form-label" for="latitude">Широта станции:</label>
+                <input class="form-control" type="number" name="latitude" id="latitude" required>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="longitude">Долгота станции:</label>
+                <input class="form-control" type="number" name="longitude" id="longitude" required>
+            </div>
+        </div>
+        <div class="d-grid gap-1">
+            <button class="btn btn-success mb-2" type="submit">Создать</button>
+            <button class="btn btn-secondary" type="reset">Очистить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
