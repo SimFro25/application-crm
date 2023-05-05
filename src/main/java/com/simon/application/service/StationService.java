@@ -67,8 +67,16 @@ public class StationService {
 
     public void create(String name, double latitude, double longitude) {
         try {
-            Statement statement = connection.createStatement();
-            statement.execute("INSERT INTO stations (name, latitude, longitude) VALUES ('" + name + "', " + latitude + ", " + longitude + ")");
+           // Statement statement = connection.createStatement();
+           // statement.execute("INSERT INTO stations (name, latitude, longitude) VALUES ('" + name + "', " + latitude + ", " + longitude + ")");
+
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO stations (name, latitude, longitude) VALUES (?, ?, ?)");
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setDouble(2, latitude);
+            preparedStatement.setDouble(3, longitude);
+
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -76,8 +84,17 @@ public class StationService {
 
     public void update(long id, String name, double latitude, double longitude) {
         try {
-            Statement statement = connection.createStatement();
-            statement.execute("UPDATE stations SET name = '" + name + "', latitude = " + latitude + ", longitude = " + longitude + "  WHERE id = " + id + "");
+            // Statement statement = connection.createStatement();
+            // statement.execute("UPDATE stations SET name = '" + name + "', latitude = " + latitude + ", longitude = " + longitude + "  WHERE id = " + id + "");
+
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stations SET name = ?, latitude = ?, longitude = ?  WHERE id = ?");
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setDouble(2, latitude);
+            preparedStatement.setDouble(3,longitude);
+            preparedStatement.setLong(4, id);
+
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -85,8 +102,14 @@ public class StationService {
 
     public void remove(long id) {
         try {
-            Statement statement = connection.createStatement();
-            statement.execute("DELETE FROM stations WHERE id = " + id + "");
+            // Statement statement = connection.createStatement();
+            // statement.execute("DELETE FROM stations WHERE id = " + id + "");
+
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM stations WHERE id = ?");
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
