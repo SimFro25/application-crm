@@ -13,14 +13,22 @@ import java.sql.SQLException;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DBHelper {
+    private static DBHelper instance;
 
     Connection connection;
 
-    public DBHelper() {
+    private DBHelper() {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/railway", "postgres", "postgres");
         } catch (SQLException e) {
             System.out.println("Can't connection to the database");
         }
+    }
+
+    public static DBHelper getInstance() {
+        if (instance == null) {
+            instance = new DBHelper();
+        }
+        return instance;
     }
 }

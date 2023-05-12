@@ -13,8 +13,9 @@ public class StationService {
 
     DBHelper dbHelper;
 
+
     public StationService() {
-        dbHelper = new DBHelper();
+        dbHelper = DBHelper.getInstance();
     }
 
     public List<Station> getAllStations() {
