@@ -25,9 +25,9 @@
       <td th:text="${station.latitude}"></td>
       <td th:text="${station.longitude}"></td>
       <td>
-        <a th:href="|view/${station.id}|">Просмотр</a>
-        <a th:href="|edit/${station.id}|">Изменить</a>
-        <a th:href="|remove/${station.id}|">Удалить</a>
+        <a th:href="|station/${station.id}|">Просмотр</a>
+        <a th:href="|station/${station.id}/edit|">Изменить</a>
+        <a th:href="|station/${station.id}/remove|">Удалить</a>
       </td>
     </tr>
     </tbody>

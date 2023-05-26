@@ -9,14 +9,12 @@ import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.lang.model.element.Name;
 
 @Controller
+@RequestMapping("station")
 public class StationController {
 
     @Autowired
@@ -25,46 +23,46 @@ public class StationController {
     @GetMapping("")
     public String viewAllStations(Model model) {
         model.addAttribute("stations", stationService.getAllStations());
-        return "stations";
+        return "station/all";
     }
 
     @GetMapping("create")
     public String create(Model model) {
-        return "create";
+        return "station/create";
     }
 
     @PostMapping("create")
     public String create(Model model, @RequestParam("name") String name, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude) {
         stationService.create(name, latitude, longitude);
-        return "redirect:/";
+        return "redirect:/station";
     }
 
-    @GetMapping("view/{id}")
+    @GetMapping("{id}")
     public String view(Model model, @PathVariable long id) {
         model.addAttribute("station", stationService.getStationById(id));
-        return "view";
+        return "station/view";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("{id}/edit")
     public String edit(Model model, @PathVariable long id) {
         model.addAttribute("station", stationService.getStationById(id));
-        return "edit";
+        return "station/edit";
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("{id}/edit")
     public String edit(Model model,
                        @PathVariable long id,
                        @RequestParam("name") String name,
                        @RequestParam("latitude") double latitude,
                        @RequestParam("longitude") double longitude)  {
         stationService.update(id, name, latitude, longitude);
-        return "redirect:/";
+        return "redirect:/station";
     }
 
-    @GetMapping("remove/{id}")
+    @GetMapping("{id}/remove")
     public String remove(Model model, @PathVariable long id) {
         stationService.remove(id);
-        return "redirect:/";
+        return "redirect:/station";
     }
 
 }
