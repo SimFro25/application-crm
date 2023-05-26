@@ -1,106 +1,51 @@
 package com.simon.application.service;
 
-import com.simon.application.model.Station;
-import com.simon.application.util.DBHelper;
+import com.simon.application.entity.Station;
+import com.simon.application.repository.StationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StationService {
 
-    DBHelper dbHelper;
-
-
-    public StationService() {
-        dbHelper = DBHelper.getInstance();
-    }
+    @Autowired
+    StationRepository stationRepository;
 
     public List<Station> getAllStations() {
         List<Station> stations = new ArrayList<>();
 
-        try {
-            Statement statement = dbHelper.getConnection().createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM stations");
-
-            while (result.next()) {
-                stations.add(Station.builder()
-                        .id(result.getLong("id"))
-                        .name(result.getString("name"))
-                        .latitude(result.getDouble("latitude"))
-                        .longitude(result.getDouble("longitude"))
-                        .build());
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        for (Station station : stationRepository.findAll()) {
+            stations.add(station);
         }
 
         return stations;
     }
 
     public Station getStationById(long id) {
-        Station station = null;
-
-        try {
-            Statement statement = dbHelper.getConnection().createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM stations WHERE id = " + id + "");
-
-            if (result.next()) {
-               station = Station.builder()
-                        .id(result.getLong("id"))
-                        .name(result.getString("name"))
-                        .latitude(result.getDouble("latitude"))
-                        .longitude(result.getDouble("longitude"))
-                        .build();
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        Station station = stationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Station with id %s isn't exists", id)));
         return station;
     }
 
     public void create(String name, double latitude, double longitude) {
-        try {
-            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement("INSERT INTO stations (name, latitude, longitude) VALUES (?, ?, ?)");
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setDouble(2, latitude);
-            preparedStatement.setDouble(3, longitude);
-
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Station station = Station.builder().name(name).latitude(latitude).longitude(longitude).build();
+        stationRepository.save(station);
     }
 
     public void update(long id, String name, double latitude, double longitude) {
-        try {
-            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement("UPDATE stations SET name = ?, latitude = ?, longitude = ?  WHERE id = ?");
+        Station station = getStationById(id);
 
-            preparedStatement.setString(1, name);
-            preparedStatement.setDouble(2, latitude);
-            preparedStatement.setDouble(3,longitude);
-            preparedStatement.setLong(4, id);
+        station.setName(name);
+        station.setLatitude(latitude);
+        station.setLongitude(longitude);
 
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        stationRepository.save(station);
     }
 
     public void remove(long id) {
-        try {
-            PreparedStatement preparedStatement = dbHelper.getConnection().prepareStatement("DELETE FROM stations WHERE id = ?");
-
-            preparedStatement.setLong(1, id);
-
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        stationRepository.deleteById(id);
     }
 }
