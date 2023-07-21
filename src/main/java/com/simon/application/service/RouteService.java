@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +32,13 @@ public class RouteService {
                 .get();
     }
 
-    public void create (String name) {
-        Route route = Route.builder()
-                .name(name)
-                .build();
+    public void create(Route route) {
         routeRepository.save(route);
     }
 
-    public void edit(long id, String name) {
+    public void edit(long id, Route routeForm) {
         Route route = getRouteById(id);
-        route.setName(name);
+        route.setName(routeForm.getName());
         routeRepository.save(route);
     }
 
