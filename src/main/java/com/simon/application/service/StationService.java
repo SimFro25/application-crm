@@ -30,17 +30,16 @@ public class StationService {
         return station;
     }
 
-    public void create(String name, double latitude, double longitude) {
-        Station station = Station.builder().name(name).latitude(latitude).longitude(longitude).build();
+    public void create(Station station) {
         stationRepository.save(station);
     }
 
-    public void update(long id, String name, double latitude, double longitude) {
+    public void update(long id, Station stationForm) {
         Station station = getStationById(id);
 
-        station.setName(name);
-        station.setLatitude(latitude);
-        station.setLongitude(longitude);
+        station.setName(stationForm.getName());
+        station.setLatitude(stationForm.getLatitude());
+        station.setLongitude(stationForm.getLongitude());
 
         stationRepository.save(station);
     }

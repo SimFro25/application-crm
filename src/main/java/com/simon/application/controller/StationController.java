@@ -1,23 +1,20 @@
 package com.simon.application.controller;
 
+import com.simon.application.entity.Station;
 import com.simon.application.service.StationService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
-
-import javax.lang.model.element.Name;
 
 @Controller
 @RequestMapping("station")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StationController {
 
-    @Autowired
     StationService stationService;
 
     @GetMapping("")
@@ -32,8 +29,8 @@ public class StationController {
     }
 
     @PostMapping("create")
-    public String create(Model model, @RequestParam("name") String name, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude) {
-        stationService.create(name, latitude, longitude);
+    public String create(Model model, @ModelAttribute Station station) {
+        stationService.create(station);
         return "redirect:/station";
     }
 
@@ -50,12 +47,8 @@ public class StationController {
     }
 
     @PostMapping("{id}/edit")
-    public String edit(Model model,
-                       @PathVariable long id,
-                       @RequestParam("name") String name,
-                       @RequestParam("latitude") double latitude,
-                       @RequestParam("longitude") double longitude)  {
-        stationService.update(id, name, latitude, longitude);
+    public String edit(Model model, @PathVariable long id, @ModelAttribute Station station)  {
+        stationService.update(id, station);
         return "redirect:/station";
     }
 
