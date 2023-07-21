@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <table class="table table-dark">
+    <tr>
+      <td><strong>ID</strong></td>
+      <td th:text="${route.id}"></td>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td th:text="${route.name}"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
