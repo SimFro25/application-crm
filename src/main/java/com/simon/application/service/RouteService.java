@@ -1,6 +1,7 @@
 package com.simon.application.service;
 
 import com.simon.application.entity.Route;
+import com.simon.application.form.RouteForm;
 import com.simon.application.repository.RouteRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +30,18 @@ public class RouteService {
 
     public Route getRouteById(long id) {
         return routeRepository.findById(id)
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Route with id %s isn't exists", id)));
     }
 
-    public void create(Route route) {
+    public void create(RouteForm routeForm) {
+        Route route = Route.builder()
+                .name(routeForm.getName())
+                .build();
+
         routeRepository.save(route);
     }
 
-    public void edit(long id, Route routeForm) {
+    public void edit(long id, RouteForm routeForm) {
         Route route = getRouteById(id);
         route.setName(routeForm.getName());
         routeRepository.save(route);

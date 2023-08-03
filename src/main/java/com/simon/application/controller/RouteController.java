@@ -1,6 +1,6 @@
 package com.simon.application.controller;
 
-import com.simon.application.entity.Route;
+import com.simon.application.form.RouteForm;
 import com.simon.application.service.RouteService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,8 @@ public class RouteController {
     }
 
     @PostMapping("create")
-    public String create(@ModelAttribute Route route) {
-        routeService.create(route);
+    public String create(@ModelAttribute RouteForm routeForm) {
+        routeService.create(routeForm);
         return "redirect:/route";
     }
 
@@ -47,8 +47,8 @@ public class RouteController {
     }
 
     @PostMapping("{id}/edit")
-    public String edit(@PathVariable long id, @ModelAttribute Route route) {
-        routeService.edit(id, route);
+    public String edit(@PathVariable long id, @ModelAttribute RouteForm routeForm) {
+        routeService.edit(id, routeForm);
         return "redirect:/route";
     }
 

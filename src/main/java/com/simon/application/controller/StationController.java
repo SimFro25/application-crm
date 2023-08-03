@@ -1,6 +1,6 @@
 package com.simon.application.controller;
 
-import com.simon.application.entity.Station;
+import com.simon.application.form.StationForm;
 import com.simon.application.service.StationService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,8 @@ public class StationController {
     }
 
     @PostMapping("create")
-    public String create(Model model, @ModelAttribute Station station) {
-        stationService.create(station);
+    public String create(Model model, @ModelAttribute StationForm stationForm) {
+        stationService.create(stationForm);
         return "redirect:/station";
     }
 
@@ -47,8 +47,8 @@ public class StationController {
     }
 
     @PostMapping("{id}/edit")
-    public String edit(Model model, @PathVariable long id, @ModelAttribute Station station)  {
-        stationService.update(id, station);
+    public String edit(Model model, @PathVariable long id, @ModelAttribute StationForm stationForm)  {
+        stationService.update(id, stationForm);
         return "redirect:/station";
     }
 
