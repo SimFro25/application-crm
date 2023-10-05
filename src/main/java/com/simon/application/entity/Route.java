@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +22,7 @@ public class Route {
     Long id;
 
     String name;
+
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    List<RailwayStop> railwayStops = new ArrayList<>();
 }

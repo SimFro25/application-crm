@@ -1,7 +1,11 @@
 package com.simon.application.service;
 
+import com.simon.application.entity.RailwayStop;
 import com.simon.application.entity.Route;
+import com.simon.application.entity.Station;
+import com.simon.application.form.RailwayStopForm;
 import com.simon.application.form.RouteForm;
+import com.simon.application.repository.RailwayStopRepository;
 import com.simon.application.repository.RouteRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +20,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RouteService {
 
+    StationService stationService;
     RouteRepository routeRepository;
+    RailwayStopRepository railwayStopRepository;
 
     public List<Route> getAll() {
         List<Route> routes = new ArrayList<>();
@@ -49,5 +55,39 @@ public class RouteService {
 
     public void delete(long id) {
         routeRepository.deleteById(id);
+    }
+
+    public RailwayStop getStopById(long railwayStopId) {
+        return railwayStopRepository.findById(railwayStopId)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Railway stop with id %d isn't exists", railwayStopId)));
+    }
+
+    public void createStop(long routeId, RailwayStopForm railwayStopForm) {
+        Route route = getRouteById(routeId);
+        Station station = stationService.getStationById(railwayStopForm.getStation());
+
+        railwayStopRepository.save(RailwayStop.builder()
+                .route(route)
+                .station(station)
+                .order(railwayStopForm.getOrder())
+                .timeOfArrival(railwayStopForm.getTimeOfArrival())
+                .timeOfDepart(railwayStopForm.getTimeOfDepart())
+                .build());
+    }
+
+    public void editStop(long stopId, RailwayStopForm railwayStopForm) {
+        RailwayStop railwayStop = getStopById(stopId);
+
+        railwayStop.setOrder(railwayStopForm.getOrder());
+        railwayStop.setStation(stationService.getStationById(railwayStopForm.getStation()));
+        railwayStop.setTimeOfArrival(railwayStopForm.getTimeOfArrival());
+        railwayStop.setTimeOfDepart(railwayStopForm.getTimeOfDepart());
+
+        railwayStopRepository.save(railwayStop);
+    }
+
+    public void deleteStop(long stopId) {
+        RailwayStop railwayStop = getStopById(stopId);
+        railwayStopRepository.delete(railwayStop);
     }
 }
