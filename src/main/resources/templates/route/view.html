@@ -17,6 +17,46 @@
       <td><strong>Name</strong></td>
       <td th:text="${route.name}"></td>
     </tr>
+    <tr>
+      <td><strong>Stations</strong></td>
+      <td>
+        <table class="table table-dark table-striped">
+          <thead>
+          <tr>
+            <td><strong>#</strong></td>
+            <td><strong>Name</strong></td>
+            <td class="text-center"><strong>Time of Arrival</strong></td>
+            <td class="text-center"><strong>Time of Depart</strong></td>
+            <td class="text-center"><strong>Stop time</strong></td>
+            <td class="text-center"><strong>Actions</strong></td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="stop : ${route.railwayStops}">
+            <td th:text="${stop.order}"></td>
+            <td th:text="${stop.station.name}"></td>
+            <td class="text-center" th:text="${stop.timeOfArrival}"></td>
+            <td class="text-center" th:text="${stop.timeOfDepart}"></td>
+            <td class="text-center" th:text="${stop.getParkingTime()}"></td>
+            <td class="text-center">
+              <a th:href="|/station/${stop.station.id}|">View</a>
+              <a th:href="|${route.id}/stop/${stop.id}/edit|">Edit</a>
+              <a th:href="|${route.id}/stop/${stop.id}/delete|">Delete</a>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="6">
+              <div class="d-grid gap-1">
+                <a class="btn btn-success" th:href="|${route.id}/stop/create|">Add stop in route</a>
+              </div>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </td>
+    </tr>
   </table>
 </div>
 </body>

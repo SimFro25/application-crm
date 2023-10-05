@@ -1,5 +1,6 @@
 package com.simon.application.controller;
 
+import com.simon.application.form.RailwayStopForm;
 import com.simon.application.form.RouteForm;
 import com.simon.application.service.RouteService;
 import lombok.AccessLevel;
@@ -56,5 +57,34 @@ public class RouteController {
     public String delete(@PathVariable long id) {
         routeService.delete(id);
         return "redirect:/route";
+    }
+
+    @GetMapping("{id}/stop/create")
+    public String stopCreate (@PathVariable Long id) {
+        return "stop/create";
+    }
+
+    @PostMapping("{id}/stop/create")
+    public String stopCreate(@PathVariable Long id, @ModelAttribute RailwayStopForm railwayStopForm) {
+        routeService.createStop(id, railwayStopForm);
+        return String.format("redirect:/route/%d", id);
+    }
+
+    @GetMapping("{routeId}/stop/{stopId}/edit")
+    public String stopEdit(Model model, @PathVariable long routeId, @PathVariable long stopId) {
+        model.addAttribute("stop", routeService.getStopById(stopId));
+        return "stop/edit";
+    }
+
+    @PostMapping("{routeId}/stop/{stopId}/edit")
+    public String stopEdit(@PathVariable long routeId, @PathVariable long stopId, @ModelAttribute RailwayStopForm railwayStopForm) {
+        routeService.editStop(stopId, railwayStopForm);
+        return String.format("redirect:/route/%d", routeId);
+    }
+
+    @GetMapping("{routeId}/stop/{stopId}/delete")
+    public String stopDelete(@PathVariable long routeId, @PathVariable long stopId) {
+        routeService.deleteStop(stopId);
+        return String.format("redirect:/route/%d", routeId);
     }
 }
