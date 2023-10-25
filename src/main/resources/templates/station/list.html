@@ -26,9 +26,9 @@
       <td th:text="${station.latitude}"></td>
       <td th:text="${station.longitude}"></td>
       <td>
-        <a th:href="|station/${station.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
-        <a th:href="|station/${station.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
-        <a th:href="|station/${station.id}/remove|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
+        <a th:href="|/station/${station.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
+        <a th:href="|/station/${station.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
+        <a th:href="|/station/${station.id}/remove|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
       </td>
     </tr>
     </tbody>
@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-1">
-        <a class="btn btn-success" href="create">Cоздать</a>
+        <a class="btn btn-success" href="/station/create">Cоздать</a>
       </div>
     </div>
   </div>

@@ -24,9 +24,9 @@
       <td th:text="${train.name}"></td>
       <td th:text="${train.route.name}"></td>
       <td>
-        <a th:href="|train/${train.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
-        <a th:href="|train/${train.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
-        <a th:href="|train/${train.id}/delete|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
+        <a th:href="|/train/${train.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
+        <a th:href="|/train/${train.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
+        <a th:href="|/train/${train.id}/delete|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
       </td>
     </tr>
     </tbody>
@@ -37,7 +37,7 @@
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-1">
-        <a class="btn btn-success" href="create">Cоздать</a>
+        <a class="btn btn-success" href="/train/create">Cоздать</a>
       </div>
     </div>
   </div>
