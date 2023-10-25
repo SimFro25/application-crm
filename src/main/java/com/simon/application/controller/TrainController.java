@@ -20,7 +20,7 @@ public class TrainController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("trains", trainService.getAllTrains());
-        return "train/all";
+        return "train/list";
     }
 
     @GetMapping("{id}")
