@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
 
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+  <script src="https://kit.fontawesome.com/0852a32285.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -39,9 +40,9 @@
             <td class="text-center" th:text="${stop.timeOfDepart}"></td>
             <td class="text-center" th:text="${stop.getParkingTime()}"></td>
             <td class="text-center">
-              <a th:href="|/station/${stop.station.id}|">View</a>
-              <a th:href="|${route.id}/stop/${stop.id}/edit|">Edit</a>
-              <a th:href="|${route.id}/stop/${stop.id}/delete|">Delete</a>
+              <a th:href="|/station/${stop.station.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
+              <a th:href="|${route.id}/stop/${stop.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
+              <a th:href="|${route.id}/stop/${stop.id}/delete|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
           </tbody>
