@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
 
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+  <script src="https://kit.fontawesome.com/0852a32285.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -27,9 +28,9 @@
         <td th:text="${route.id}"></td>
         <td th:text="${route.name}"></td>
         <td>
-          <a th:href="|route/${route.id}|">Просмотр</a>
-          <a th:href="|route/${route.id}/edit|">Изменить</a>
-          <a th:href="|route/${route.id}/delete|">Удалить</a>
+          <a th:href="|/route/${route.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
+          <a th:href="|/route/${route.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>
+          <a th:href="|/route/${route.id}/delete|" class="p-1 text-danger"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
     </tbody>
@@ -37,7 +38,7 @@
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-1">
-        <a class="btn btn-success" href="route/create">Cоздать</a>
+        <a class="btn btn-success" href="/route/create">Cоздать</a>
       </div>
     </div>
   </div>

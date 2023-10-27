@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css/"/>
+  <script src="https://kit.fontawesome.com/0852a32285.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <table class="table table-dark table-stripped">
+    <tr>
+      <td><strong>ID</strong></td>
+      <td th:text="${train.id}"></td>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td th:text="${train.name}"></td>
+    </tr>
+    <tr>
+      <td><strong>Route</strong></td>
+      <td>
+        <a th:href="|/route/${train.route.id}|" th:text="${train.route.name}"></a>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

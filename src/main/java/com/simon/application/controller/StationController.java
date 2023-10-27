@@ -20,7 +20,7 @@ public class StationController {
     @GetMapping("")
     public String viewAllStations(Model model) {
         model.addAttribute("stations", stationService.getAllStations());
-        return "station/all";
+        return "station/list";
     }
 
     @GetMapping("create")

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <form method="post">
+    <div class="row">
+      <div class="col-12">
+        <label class="form-label" for="name">Введите название поезда</label>
+        <input class="form-control" type="text" id="name" name="name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label class="form-label" for="route">Введите номер маршрута</label>
+        <input class="form-control" type="number" id="route" name="route">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="d-grid gap-2">
+        <button class="btn btn-success" type="submit">Cоздать</button>
+        <button class="btn btn-secondary" type="reset">Очистить</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
