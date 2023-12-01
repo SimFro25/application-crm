@@ -2,6 +2,7 @@ package com.simon.application.service;
 
 import com.simon.application.entity.Carriage;
 import com.simon.application.form.CarriageForm;
+import com.simon.application.mapper.CarriageMapper;
 import com.simon.application.repository.CarriageRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CarriageService {
 
     TrainService trainService;
+    CarriageMapper carriageMapper;
     CarriageRepository carriageRepository;
 
     public Carriage getCarriageById(long id) {
@@ -22,12 +24,9 @@ public class CarriageService {
     }
 
     public void create(long trainId, CarriageForm carriageForm) {
-        Carriage entity = Carriage.builder()
-                .number(carriageForm.getNumber())
-                .type(carriageForm.getType())
-                .seats(carriageForm.getSeats())
-                .train(trainService.findTrainById(trainId))
-                .build();
+        carriageForm.setTrainId(trainId);
+
+        Carriage entity = carriageMapper.mapFormToEntity(carriageForm);
         carriageRepository.save(entity);
     }
 

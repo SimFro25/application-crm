@@ -2,7 +2,11 @@ package com.simon.application.service;
 
 import com.simon.application.entity.Station;
 import com.simon.application.form.StationForm;
+import com.simon.application.mapper.StationMapper;
 import com.simon.application.repository.StationRepository;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StationService {
 
-    @Autowired
+    StationMapper stationMapper;
     StationRepository stationRepository;
 
     public List<Station> getAllStations() {
@@ -31,12 +37,7 @@ public class StationService {
     }
 
     public void create(StationForm stationForm) {
-        Station station = Station.builder()
-                .name(stationForm.getName())
-                .latitude(stationForm.getLatitude())
-                .longitude(stationForm.getLongitude())
-                .build();
-
+        Station station = stationMapper.mapFormToEntity(stationForm);
         stationRepository.save(station);
     }
 

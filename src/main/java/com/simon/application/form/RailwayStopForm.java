@@ -12,9 +12,9 @@ import java.time.LocalTime;
 @FieldDefaults (level = AccessLevel.PRIVATE)
 public class RailwayStopForm {
 
-    int id;
-    int order;
-    int station;
+    Long id;
+    Integer order;
+    Long station;
     LocalTime timeOfArrival;
     LocalTime timeOfDepart;
 }
