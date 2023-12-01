@@ -5,6 +5,8 @@ import com.simon.application.entity.Route;
 import com.simon.application.entity.Station;
 import com.simon.application.form.RailwayStopForm;
 import com.simon.application.form.RouteForm;
+import com.simon.application.mapper.RailwayStopMapper;
+import com.simon.application.mapper.RouteMapper;
 import com.simon.application.repository.RailwayStopRepository;
 import com.simon.application.repository.RouteRepository;
 import lombok.AccessLevel;
@@ -21,6 +23,8 @@ import java.util.List;
 public class RouteService {
 
     StationService stationService;
+    RouteMapper routeMapper;
+    RailwayStopMapper railwayStopMapper;
     RouteRepository routeRepository;
     RailwayStopRepository railwayStopRepository;
 
@@ -40,10 +44,7 @@ public class RouteService {
     }
 
     public void create(RouteForm routeForm) {
-        Route route = Route.builder()
-                .name(routeForm.getName())
-                .build();
-
+        Route route = routeMapper.mapFormToEntity(routeForm);
         routeRepository.save(route);
     }
 
@@ -66,13 +67,10 @@ public class RouteService {
         Route route = getRouteById(routeId);
         Station station = stationService.getStationById(railwayStopForm.getStation());
 
-        railwayStopRepository.save(RailwayStop.builder()
-                .route(route)
-                .station(station)
-                .order(railwayStopForm.getOrder())
-                .timeOfArrival(railwayStopForm.getTimeOfArrival())
-                .timeOfDepart(railwayStopForm.getTimeOfDepart())
-                .build());
+        RailwayStop railwayStop = railwayStopMapper.mapFormToEntity(railwayStopForm)
+                .setStation(station)
+                .setRoute(route);
+        railwayStopRepository.save(railwayStop);
     }
 
     public void editStop(long stopId, RailwayStopForm railwayStopForm) {

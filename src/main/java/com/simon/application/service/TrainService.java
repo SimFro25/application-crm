@@ -4,6 +4,7 @@ import com.simon.application.entity.RailwayStop;
 import com.simon.application.entity.Route;
 import com.simon.application.entity.Train;
 import com.simon.application.form.TrainForm;
+import com.simon.application.mapper.TrainMapper;
 import com.simon.application.repository.TrainRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class TrainService {
 
     RouteService routeService;
+    TrainMapper trainMapper;
     TrainRepository trainRepository;
 
     public List<Train> getAllTrains() {
@@ -40,10 +42,7 @@ public class TrainService {
     }
 
     public void create(TrainForm trainForm) {
-        Train entity = Train.builder()
-                .name(trainForm.getName())
-                .route(routeService.getRouteById(trainForm.getRoute()))
-                .build();
+        Train entity = trainMapper.mapFormToEntity(trainForm);
         trainRepository.save(entity);
     }
 
