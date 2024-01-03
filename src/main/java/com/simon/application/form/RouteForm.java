@@ -13,4 +13,5 @@ public class RouteForm {
 
     Long id;
     String name;
+    Double distancePrice;
 }
