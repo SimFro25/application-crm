@@ -51,6 +51,7 @@ public class RouteService {
     public void edit(long id, RouteForm routeForm) {
         Route route = getRouteById(id);
         route.setName(routeForm.getName());
+        route.setDistancePrice(routeForm.getDistancePrice());
         routeRepository.save(route);
     }
 
