@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css/"/>
+  <script src="https://kit.fontawesome.com/0852a32285.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <table class="table table-dark table-hover mb-3">
+    <tbody>
+    <tr>
+      <td><strong>ID</strong></td>
+      <td th:text="${carriageType.id}"></td>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td th:text="${carriageType.name}"></td>
+    </tr>
+    <tr>
+      <td><strong>Seats</strong></td>
+      <td th:text="${carriageType.seats}"></td>
+    </tr>
+    <tr>
+      <td><strong>Price</strong></td>
+      <td th:text="${carriageType.price}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
