@@ -50,6 +50,9 @@
               <strong>Seats</strong>
             </td>
             <td>
+              <strong>Price of carriage type</strong>
+            </td>
+            <td>
               <strong>Actions</strong>
             </td>
           </tr>
@@ -57,8 +60,9 @@
           <tbody>
             <tr th:each="carriage : ${train.carriages}">
               <td th:text="${carriage.number}"></td>
-              <td th:text="${carriage.type}"></td>
-              <td th:text="${carriage.seats}"></td>
+              <td th:text="${carriage.carriageType.name}"></td>
+              <td th:text="${carriage.carriageType.seats}"></td>
+              <td th:text="${carriage.carriageType.price}"></td>
               <td>
                 <a th:href="|/train/${train.id}/carriage/${carriage.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
                 <a th:href="|/train/${train.id}/carriage/${carriage.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>

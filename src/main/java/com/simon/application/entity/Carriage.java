@@ -24,11 +24,9 @@ public class Carriage {
     @Column(nullable = false)
     Short number;
 
-    @Column(nullable = false)
-    String type;
-
-    @Column(nullable = false)
-    Short seats;
+    @ManyToOne
+    @JoinColumn(name = "carriage_type_id")
+    CarriageType carriageType;
 
     @ManyToOne
     Train train;

@@ -5,13 +5,20 @@ import com.simon.application.form.CarriageForm;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CarriageMapper {
 
-    @Mapping(source = "trainId", target = "train.id")
+    @Mappings(value = {
+            @Mapping(source = "trainId", target = "train.id"),
+            @Mapping(source = "carriageTypeId", target = "carriageType.id")
+    })
     Carriage mapFormToEntity(CarriageForm carriageForm);
 
-    @Mapping(source = "train.id", target = "trainId")
+    @Mappings(value = {
+            @Mapping(source = "train.id", target = "trainId"),
+            @Mapping(source = "carriageType.id", target = "carriageTypeId")
+    })
     CarriageForm mapEntityToForm(Carriage carriage);
 }
