@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CarriageService {
 
-    TrainService trainService;
+    CarriageTypeService carriageTypeService;
     CarriageMapper carriageMapper;
     CarriageRepository carriageRepository;
 
@@ -34,8 +34,7 @@ public class CarriageService {
         Carriage carriage = getCarriageById(carriageId);
 
         carriage.setNumber(carriageForm.getNumber());
-        carriage.setType(carriageForm.getType());
-        carriage.setSeats(carriageForm.getSeats());
+        carriage.setCarriageType(carriageTypeService.getCarriageTypeById(carriageForm.getCarriageTypeId()));
 
         carriageRepository.save(carriage);
     }

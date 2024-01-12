@@ -14,20 +14,19 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "carriages")
-public class Carriage {
+@Table(name = "carriages_type")
+public class CarriageType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false)
-    Short number;
+    String name;
 
-    @ManyToOne
-    @JoinColumn(name = "carriage_type_id")
-    CarriageType carriageType;
+    @Column(nullable = false)
+    Short seats;
 
-    @ManyToOne
-    Train train;
+    @Column(nullable = false)
+    Double price;
 }

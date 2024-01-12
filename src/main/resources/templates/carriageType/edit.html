@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <form method="post">
+    <div class="row mb-3">
+      <div class="col-12">
+        <label class="form-label" for="name">Enter name:</label>
+        <input class="form-control" type="text" id="name" name="name" th:value="${carriageType.name}" required>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <label class="form-label" for="seats">Enter amount of seats:</label>
+        <input class="form-control" type="number" id="seats" name="seats" th:value="${carriageType.seats}" required>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <label class="form-label" for="price">Enter price:</label>
+        <input class="form-control" type="number" id="price" name="price" th:value="${carriageType.price}" required>
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-success" type="submit">Save</button>
+      <button class="btn btn-secondary" type="reset">Clear</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

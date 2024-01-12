@@ -12,15 +12,18 @@
     <div class="row">
       <div class="col-12">
         <label class="form-label" for="name">Enter route name:</label>
-        <input class="form-control" type="text" name="name" id="name" th:value="${route.name}" />
+        <input class="form-control" type="text" name="name" id="name" th:value="${route.name}" required/>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-12">
-        <div class="d-grid gap-1">
-          <button class="btn btn-success" type="submit">Edit</button>
-        </div>
+        <label class="form-label" for="distancePrice">Enter price of distance:</label>
+        <input class="form-control" type="number" name="distancePrice" id="distancePrice" th:value="${route.distancePrice}" required/>
       </div>
+    </div>
+    <div class="d-grid gap-1 mt-2">
+      <button class="btn btn-success mb-2" type="submit">Save</button>
+      <button class="btn btn-secondary" type="reset">Clear</button>
     </div>
   </form>
 </div>
