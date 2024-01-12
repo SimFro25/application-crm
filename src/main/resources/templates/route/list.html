@@ -19,6 +19,9 @@
           <strong>Название маршрута</strong>
         </td>
         <td>
+          <strong>Цена за дистанцию</strong>
+        </td>
+        <td>
           <strong>Действия</strong>
         </td>
       </tr>
@@ -27,6 +30,7 @@
       <tr th:each="route : ${routes}">
         <td th:text="${route.id}"></td>
         <td th:text="${route.name}"></td>
+        <td th:text="${route.distancePrice}"></td>
         <td>
           <a th:href="|/route/${route.id}|" class="p-1 text-info"><i class="fas fa-eye"></i></a>
           <a th:href="|/route/${route.id}/edit|" class="p-1 text-warning"><i class="fas fa-pen"></i></a>

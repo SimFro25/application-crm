@@ -21,7 +21,11 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(name = "name", nullable = false)
     String name;
+
+    @Column(name = "distance_price", nullable = false)
+    Double distancePrice;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
     List<RailwayStop> railwayStops = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.simon.application.form;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -9,9 +10,11 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class RouteForm {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CarriageTypeForm {
 
     Long id;
     String name;
-    Double distancePrice;
+    Short seats;
+    Double price;
 }

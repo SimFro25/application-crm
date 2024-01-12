@@ -13,7 +13,6 @@ public class CarriageForm {
 
     Long id;
     Short number;
-    String type;
-    Short seats;
+    Long carriageTypeId;
     Long trainId;
 }
